@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bijouterie Hassane - Joaillerie de luxe à Abidjan, Côte d'Ivoire. Or 18 carats certifié, bagues, colliers, bracelets et montres haut de gamme.">
+    <meta name="keywords" content="bijouterie Abidjan, or 18 carats, joaillerie Côte d'Ivoire, bagues or, colliers luxe, montres haut de gamme">
+    <title>Bijouterie Hassane | Joaillerie de Luxe à Abidjan</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#E6C875',
+                            500: '#D4AF37',
+                            600: '#C5A028',
+                            700: '#B8941F',
+                        },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#111111',
+                            700: '#1a1a1a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #F4E7BE 50%, #D4AF37 100%);
+            background-size: 200% 200%;
+        }
+        
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #F4E7BE 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .collection-card:hover .collection-image {
+            transform: scale(1.1);
+        }
+        
+        .collection-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+        }
+        
+        .feature-icon {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-white font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="#" class="font-serif text-2xl font-bold gold-text-gradient tracking-wider">
+                        Hassane
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#accueil" class="text-gray-300 hover:text-gold-500 transition-colors text-sm uppercase tracking-widest">Accueil</a>
+                    <a href="#apropos" class="text-gray-300 hover:text-gold-500 transition-colors text-sm uppercase tracking-widest">À propos</a>
+                    <a href="#collections" class="text-gray-300 hover:text-gold-500 transition-colors text-sm uppercase tracking-widest">Collections</a>
+                    <a href="#pourquoi-nous" class="text-gray-300 hover:text-gold-500 transition-colors text-sm uppercase tracking-widest">Pourquoi nous</a>
+                    <a href="#contact" class="px-6 py-2 border border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-black transition-all duration-300 text-sm uppercase tracking-widest">
+                        Contact
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-gold-500 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-800 border-b border-gold-500/20">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#accueil" class="block px-3 py-2 text-gray-300 hover:text-gold-500 hover:bg-dark-700 rounded-md text-base font-medium">Accueil</a>
+                <a href="#apropos" class="block px-3 py-2 text-gray-300 hover:text-gold-500 hover:bg-dark-700 rounded-md text-base font-medium">À propos</a>
+                <a href="#collections" class="block px-3 py-2 text-gray-300 hover:text-gold-500 hover:bg-dark-700 rounded-md text-base font-medium">Collections</a>
+                <a href="#pourquoi-nous" class="block px-3 py-2 text-gray-300 hover:text-gold-500 hover:bg-dark-700 rounded-md text-base font-medium">Pourquoi nous</a>
+                <a href="#contact" class="block px-3 py-2 text-gold-500 hover:bg-dark-700 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="http://static.photos/gold/1200x630/42" alt="Bijoux en or luxueux" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto animate-fade-in">
+            <p class="text-gold-400 text-sm md:text-base uppercase tracking-[0.3em] mb-4 font-medium">Joaillerie de Luxe à Abidjan</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+                L'élégance à<br>
+                <span class="gold-text-gradient">l'état pur</span>
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Découvrez notre exclusive collection de bijoux en or 18 carats, 
+                façonnés avec passion et savoir-faire depuis plus de 15 ans.
+            </p>
+            <a href="#collections" class="inline-block px-10 py-4 bg-gradient-to-r from-gold-600 to-gold-500 text-black font-semibold text-lg rounded-sm hover:from-gold-500 hover:to-gold-400 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-gold-500/20">
+                Découvrir nos collections
+            </a>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-gold-500"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="py-20 md:py-32 bg-dark-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="relative">
+                        <div class="absolute -inset-4 border border-gold-500/30 rounded-sm transform rotate-3"></div>
+                        <img src="http://static.photos/craft/1024x576/33" alt="Artisanat joaillier" class="relative w-full h-[500px] object-cover rounded-sm shadow-2xl">
+                        <div class="absolute -bottom-6 -right-6 bg-dark-800 p-6 border border-gold-500/20 rounded-sm shadow-xl">
+                            <p class="font-serif text-4xl text-gold-500 font-bold">15+</p>
+                            <p class="text-gray-400 text-sm uppercase tracking-wider">Ans d'expertise</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal delay-200">
+                    <p class="text-gold-500 text-sm uppercase tracking-[0.2em] mb-3">Notre Histoire</p>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 text-white">
+                        L'art de la joaillerie<br>à Abidjan
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Située au cœur d'Abidjan, Bijouterie Hassane incarne depuis 2008 l'excellence 
+                        de la joaillerie ivoirienne. Notre maison sélectionne les plus beaux bijoux 
+                        en or 18 carats, alliant tradition artisanale et design contemporain.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        Chaque pièce est choisie avec le plus grand soin pour refléter l'élégance 
+                        et le raffinement. Nous croyons que la joaillerie n'est pas qu'un simple 
+                        accessoire, mais un héritage précieux transmis de génération en génération.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-6 border-t border-gold-500/20 pt-8">
+                        <div class="text-center">
+                            <i data-lucide="gem" class="w-8 h-8 text-gold-500 mx-auto mb-2"></i>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider">Qualité</p>
+                        </div>
+                        <div class="text-center">
+                            <i data-lucide="shield-check" class="w-8 h-8 text-gold-500 mx-auto mb-2"></i>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider">Authenticité</p>
+                        </div>
+                        <div class="text-center">
+                            <i data-lucide="award" class="w-8 h-8 text-gold-500 mx-auto mb-2"></i>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider">Expertise</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="py-20 md:py-32 bg-dark-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-gold-500 text-sm uppercase tracking-[0.2em] mb-3">Notre Sélection</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Nos Collections</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Explorez nos gammes exclusives de bijoux en or pour chaque occasion</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Bagues -->
+                <div class="collection-card group relative overflow-hidden rounded-sm cursor-pointer reveal">
+                    <div class="h-80 overflow-hidden">
+                        <img src="http://static.photos/cosmetic/640x360/1" alt="Bagues en or" class="collection-image w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 collection-overlay flex items-end p-6">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-serif text-2xl font-bold text-white mb-1">Bagues</h3>
+                            <p class="text-gold-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Fiancailles, alliances & solitaires</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colliers -->
+                <div class="collection-card group relative overflow-hidden rounded-sm cursor-pointer reveal delay-100">
+                    <div class="h-80 overflow-hidden">
+                        <img src="http://static.photos/cosmetic/640x360/2" alt="Colliers en or" class="collection-image w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 collection-overlay flex items-end p-6">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-serif text-2xl font-bold text-white mb-1">Colliers</h3>
+                            <p class="text-gold-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Chaînes, pendentifs & sautoirs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bracelets -->
+                <div class="collection-card group relative overflow-hidden rounded-sm cursor-pointer reveal delay-200">
+                    <div class="h-80 overflow-hidden">
+                        <img src="http://static.photos/cosmetic/640x360/3" alt="Bracelets en or" class="collection-image w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 collection-overlay flex items-end p-6">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-serif text-2xl font-bold text-white mb-1">Bracelets</h3>
+                            <p class="text-gold-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Jonc, gourmettes & charmes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Montres -->
+                <div class="collection-card group relative overflow-hidden rounded-sm cursor-pointer reveal">
+                    <div class="h-80 overflow-hidden">
+                        <img src="http://static.photos/craft/640x360/4" alt="Montres de luxe" class="collection-image w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 collection-overlay flex items-end p-6">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-serif text-2xl font-bold text-white mb-1">Montres</h3>
+                            <p class="text-gold-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Haute horlogerie & accessoires</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bijoux personnalisés -->
+                <div class="collection-card group relative overflow-hidden rounded-sm cursor-pointer reveal delay-100 lg:col-span-2">
+                    <div class="h-80 overflow-hidden">
+                        <img src="http://static.photos/craft/640x360/5" alt="Bijoux personnalisés" class="collection-image w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 collection-overlay flex items-end p-6">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-serif text-2xl font-bold text-white mb-1">Bijoux Personnalisés</h3>
+                            <p class="text-gold-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Créations uniques sur mesure selon vos désirs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="pourquoi-nous" class="py-20 md:py-32 bg-dark-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(212,175,55,0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <p class="text-gold-500 text-sm uppercase tracking-[0.2em] mb-3">Nos Engagements</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Pourquoi nous choisir</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Des standards d'excellence pour des bijoux d'exception</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Or certifié -->
+                <div class="bg-dark-800 p-8 border border-gold-500/20 rounded-sm hover:border-gold-500/50 transition-all duration-300 group reveal">
+                    <div class="w-14 h-14 rounded-full bg-gold-500/10 flex items-center justify-center mb-6 feature-icon group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="shield" class="w-7 h-7 text-gold-500"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">Or Certifié</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Tous nos bijoux sont en or 18 carats authentique, certifiés et garantis avec poinçon officiel.
+                    </p>
+                </div>
+
+                <!-- Service personnalisé -->
+                <div class="bg-dark-800 p-8 border border-gold-500/20 rounded-sm hover:border-gold-500/50 transition-all duration-300 group reveal delay-100">
+                    <div class="w-14 h-14 rounded-full bg-gold-500/10 flex items-center justify-center mb-6 feature-icon group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="user" class="w-7 h-7 text-gold-500"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">Service Personnalisé</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Conseils experts et accompagnement personnalisé pour trouver le bijou idéal selon vos envies.
+                    </p>
+                </div>
+
+                <!-- Prix compétitifs -->
+                <div class="bg-dark-800 p-8 border border-gold-500/20 rounded-sm hover:border-gold-500/50 transition-all duration-300 group reveal delay-200">
+                    <div class="w-14 h-14 rounded-full bg-gold-500/10 flex items-center justify-center mb-6 feature-icon group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="badge" class="w-7 h-7 text-gold-500"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">Prix Compétitifs</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Les meilleurs prix du marché à Abidjan pour une joaillerie de luxe accessible à tous.
+                    </p>
+                </div>
+
+                <!-- Livraison -->
+                <div class="bg-dark-800 p-8 border border-gold-500/20 rounded-sm hover:border-gold-500/50 transition-all duration-300 group reveal delay-300">
+                    <div class="w-14 h-14 rounded-full bg-gold-500/10 flex items-center justify-center mb-6 feature-icon group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="truck" class="w-7 h-7 text-gold-500"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">Livraison à Abidjan</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Service de livraison rapide et sécurisé dans tout Abidjan et ses environs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-32 bg-dark-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-gold-500 text-sm uppercase tracking-[0.2em] mb-3">Nous Contacter</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Contactez-nous</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Venez nous rendre visite ou contactez-nous pour toute demande personnalisée</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Info & Form -->
+                <div class="reveal">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                        <div class="flex items-start space-x-4 p-6 bg-dark-900 border border-gold-500/20 rounded-sm">
+                            <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-gold-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-white font-bold mb-1">Adresse</h4>
+                                <p class="text-gray-400 text-sm">Cocody, Abidjan<br>Côte d'Ivoire</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 p-6 bg-dark-900 border border-gold-500/20 rounded-sm">
+                            <div class="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="w-5 h-5 text-gold-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-white font-bold mb-1">Téléphone</h4>
+                                <p class="text-gray-400 text-sm">+225 07 XX XX XX<br>+225 05 XX XX XX</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <form id="contact-form" class="space-y-6 bg-dark-900 p-8 border border-gold-500/20 rounded-sm">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-400 text-sm mb-2 uppercase tracking-wider">Nom complet</label>
+                                <input type="text" name="name" required class="w-full px-4 py-3 bg-dark-800 border border-gold-500/30 rounded-sm text-white placeholder-gray-600 transition-all duration-300" placeholder="Votre nom">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 text-sm mb-2 uppercase tracking-wider">Téléphone</label>
+                                <input type="tel" name="phone" required class="w-full px-4 py-3 bg-dark-800 border border-gold-500/30 rounded-sm text-white placeholder-gray-600 transition-all duration-300" placeholder="+225 XX XX XX XX">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2 uppercase tracking-wider">Email</label>
+                            <input type="email" name="email" required class="w-full px-4 py-3 bg-dark-800 border border-gold-500/30 rounded-sm text-white placeholder-gray-600 transition-all duration-300" placeholder="votre@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2 uppercase tracking-wider">Message</label>
+                            <textarea name="message" rows="4" required class="w-full px-4 py-3 bg-dark-800 border border-gold-500/30 rounded-sm text-white placeholder-gray-600 transition-all duration-300 resize-none" placeholder="Décrivez votre demande..."></textarea>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button type="submit" class="flex-1 px-8 py-4 bg-gradient-to-r from-gold-600 to-gold-500 text-black font-semibold rounded-sm hover:from-gold-500 hover:to-gold-400 transition-all duration-300 shadow-lg shadow-gold-500/20">
+                                Envoyer le message
+                            </button>
+                            <a href="https://wa.me/22500000000" target="_blank" class="flex items-center justify-center px-8 py-4 border border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-300 rounded-sm font-semibold">
+                                <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+                                WhatsApp
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Map -->
+                <div class="reveal delay-200 h-full min-h-[400px]">
+                    <div class="w-full h-full bg-dark-900 border border-gold-500/20 rounded-sm overflow-hidden relative">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254883.50292657815!2d-4.12784125!3d5.34845015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc2095ee2d88aa3%3A0x18d924cff296d53a!2sCocody%2C%20Abidjan!5e0!3m2!1sfr!2sci!4v1699900000000!5m2!1sfr!2sci"
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="absolute inset-0">
+                        </iframe>
+                        <div class="absolute bottom-4 left-4 bg-dark-900/90 p-4 border border-gold-500/20 rounded-sm backdrop-blur-sm">
+                            <p class="text-white font-serif font-bold">Bijouterie Hassane</p>
+                            <p class="text-gray-400 text-sm">Cocody, Abidjan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-gold-500/20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <h3 class="font-serif text-2xl font-bold gold-text-gradient mb-4">Hassane</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-md">
+                        Bijouterie de luxe à Abidjan spécialisée dans l'or 18 carats. 
+                        Engagement qualité, authenticité garantie et service d'excellence depuis 2008.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Liens rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Accueil</a></li>
+                        <li><a href="#collections" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Collections</a></li>
+                        <li><a href="#apropos" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">À propos</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-gold-500 transition-colors text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Horaires</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex justify-between"><span>Lun - Ven:</span> <span>08h - 18h</span></li>
+                        <li class="flex justify-between"><span>Samedi:</span> <span>09h - 17h</span></li>
+                        <li class="flex justify-between"><span>Dimanche:</span> <span class="text-gold-500">Fermé</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gold-500/20 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm text-center md:text-left">
+                    © 2024 Bijouterie Hassane. Tous droits réservés.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <span class="sr-only">Facebook</span>
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <span class="sr-only">Instagram</span>
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold-500 transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "JewelryStore",
+        "name": "Bijouterie Hassane",
+        "description": "Joaillerie de luxe à Abidjan, Côte d'Ivoire. Vente de bijoux en or 18 carats certifiés.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Cocody",
+            "addressLocality": "Abidjan",
+            "addressCountry": "CI"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "5.3484",
+            "longitude": "-4.0278"
+        },
+        "telephone": "+22500000000",
+        "openingHours": "Mo-Fr 08:00-18:00, Sa 09:00-17:00",
+        "priceRange": "$$$"
+    }
+    </script>
+
+    <script src="script.js"></script>
+<script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+</body>
+</html>
